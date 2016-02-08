@@ -2,6 +2,8 @@ package erjon.lamy.channelmessaging;
 
 import android.os.AsyncTask;
 
+import com.google.gson.Gson;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -23,6 +25,7 @@ public class WSRequest extends AsyncTask<String, Integer, String>{
     private String url;
     private List<NameValuePair> parametres;
     private ArrayList<OnWSEventListener> listeners = new ArrayList<>();
+    private Exception myException = null;
 
     public WSRequest(String url, List<NameValuePair> parametres) {
         this.url = url;
@@ -42,6 +45,7 @@ public class WSRequest extends AsyncTask<String, Integer, String>{
         try {
             httppost.setEntity(new UrlEncodedFormEntity(parametres));
         } catch (UnsupportedEncodingException e) {
+            myException = e;
         //TODO Handler
         }
         // Execute HTTP Post Request
@@ -50,6 +54,7 @@ public class WSRequest extends AsyncTask<String, Integer, String>{
             response = httpclient.execute(httppost);
             content = EntityUtils.toString(response.getEntity());
         } catch (IOException e) {
+            myException = e;
         //TODO Handler
         }
 
@@ -62,7 +67,15 @@ public class WSRequest extends AsyncTask<String, Integer, String>{
 
         for (OnWSEventListener listener : listeners)
         {
-            listener.OnSuccess(s);
+            if (myException == null)
+            {
+                listener.OnSuccess(s);
+            }
+            else
+            {
+                listener.OnError();
+            }
+
         }
     }
 }

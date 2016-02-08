@@ -1,5 +1,7 @@
 package erjon.lamy.channelmessaging;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,8 +11,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -20,8 +25,8 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, OnWSEventListener {
     private Button btnValider;
-    private TextView txtIdentifiant;
-    private TextView txtMotDePasse;
+    private EditText txtIdentifiant;
+    private EditText txtMotDePasse;
     private List<NameValuePair> params;
 
     @Override
@@ -32,8 +37,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setSupportActionBar(toolbar);
 
         btnValider = (Button) findViewById(R.id.btnValider);
-        txtIdentifiant = (TextView) findViewById(R.id.txtIdentifiant);
-        txtMotDePasse = (TextView) findViewById(R.id.txtMotDePasse);
+        txtIdentifiant = (EditText) findViewById(R.id.editIdentifiant);
+        txtMotDePasse = (EditText) findViewById(R.id.editMotDePasse);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +90,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void OnSuccess(String result) {
-        Toast toast = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
-        toast.show();
+        Gson gson = new Gson();
+        ConnectGson connection = gson.fromJson(result, ConnectGson.class);
+
+        if(connection.getCode() == 200)
+        {
+            SharedPreferences settings = getSharedPreferences("PREFS", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("accessToken", connection.getAccesstoken());
+            editor.commit();
+
+            Intent intentChannelList = new Intent(getApplicationContext(),ChannelListActivity.class);
+            startActivity(intentChannelList);
+        }
+        else
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), connection.getResponse(), Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     @Override
