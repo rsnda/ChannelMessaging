@@ -1,10 +1,8 @@
-package erjon.lamy.channelmessaging;
+package erjon.lamy.channelmessaging.ChannelActivities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -22,6 +19,11 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import erjon.lamy.channelmessaging.Gson.ConnectGson;
+import erjon.lamy.channelmessaging.OnWSEventListener;
+import erjon.lamy.channelmessaging.R;
+import erjon.lamy.channelmessaging.WSRequest;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, OnWSEventListener {
     private Button btnValider;
@@ -39,15 +41,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnValider = (Button) findViewById(R.id.btnValider);
         txtIdentifiant = (EditText) findViewById(R.id.editIdentifiant);
         txtMotDePasse = (EditText) findViewById(R.id.editMotDePasse);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         btnValider.setOnClickListener(this);
     }

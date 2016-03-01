@@ -1,16 +1,13 @@
-package erjon.lamy.channelmessaging;
+package erjon.lamy.channelmessaging.ChannelActivities;
 
-import android.app.ListActivity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -20,7 +17,14 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChannelListActivity extends AppCompatActivity implements OnWSEventListener {
+import erjon.lamy.channelmessaging.ChannelAdapter;
+import erjon.lamy.channelmessaging.Gson.ChannelContener;
+import erjon.lamy.channelmessaging.Gson.ChannelGson;
+import erjon.lamy.channelmessaging.OnWSEventListener;
+import erjon.lamy.channelmessaging.R;
+import erjon.lamy.channelmessaging.WSRequest;
+
+public class ChannelListActivity extends AppCompatActivity implements OnWSEventListener, AdapterView.OnItemClickListener {
     private ListView myList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +34,7 @@ public class ChannelListActivity extends AppCompatActivity implements OnWSEventL
         setSupportActionBar(toolbar);
 
         myList = (ListView)findViewById(R.id.listView);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        myList.setOnItemClickListener(this);
         SharedPreferences settings = getSharedPreferences("PREFS", 0);
         String accessToken = settings.getString("accessToken", "");
 
@@ -58,11 +53,7 @@ public class ChannelListActivity extends AppCompatActivity implements OnWSEventL
         ChannelGson[] mesChannels = channels.getChannels();
 
         myList.setAdapter(new ChannelAdapter(mesChannels, this));
-        for(ChannelGson mych : mesChannels)
-        {
-            Toast toast = Toast.makeText(getApplicationContext(), mych.getName(), Toast.LENGTH_LONG);
-            toast.show();
-        }
+
     }
 
     @Override
@@ -70,4 +61,10 @@ public class ChannelListActivity extends AppCompatActivity implements OnWSEventL
 
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intentChannel = new Intent(getApplicationContext(),ChannelActivity.class);
+        intentChannel.putExtra("id", id+"");
+        startActivity(intentChannel);
+    }
 }

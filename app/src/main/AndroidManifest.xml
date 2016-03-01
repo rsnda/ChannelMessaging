@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".ChannelActivities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,8 +21,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChannelListActivity"
+            android:name=".ChannelActivities.ChannelListActivity"
             android:label="@string/title_activity_channel_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChannelActivities.ChannelActivity"
+            android:label="@string/title_activity_channel"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

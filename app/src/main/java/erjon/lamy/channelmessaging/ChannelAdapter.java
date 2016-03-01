@@ -5,11 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
+import erjon.lamy.channelmessaging.Gson.ChannelGson;
 
 /**
  * Created by Erjon on 08/02/2016.
@@ -19,7 +17,7 @@ public class ChannelAdapter extends BaseAdapter {
     private ChannelGson[] channels;
     private Context context;
 
-    ChannelAdapter(ChannelGson[] myChannels, Context myContext)
+    public ChannelAdapter(ChannelGson[] myChannels, Context myContext)
     {
         channels = myChannels;
         context = myContext;
@@ -40,7 +38,7 @@ public class ChannelAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position)
     {
-        return position;
+        return getItem(position).getChannelId();
     }
 
     @Override

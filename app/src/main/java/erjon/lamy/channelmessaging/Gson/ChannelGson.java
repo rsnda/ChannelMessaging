@@ -1,4 +1,4 @@
-package erjon.lamy.channelmessaging;
+package erjon.lamy.channelmessaging.Gson;
 
 /**
  * Created by Erjon on 08/02/2016.
@@ -8,10 +8,7 @@ public class ChannelGson {
     private String name;
     private int connectedUsers;
 
-    ChannelGson()
-    {
-
-    }
+    ChannelGson(){}
 
     public int getConnectedUsers() {
         return connectedUsers;

@@ -1,4 +1,4 @@
-package erjon.lamy.channelmessaging;
+package erjon.lamy.channelmessaging.Gson;
 
 /**
  * Created by Erjon on 08/02/2016.
@@ -6,9 +6,7 @@ package erjon.lamy.channelmessaging;
 public class ChannelContener {
     private ChannelGson[] channels;
 
-    ChannelContener(){
-
-    }
+    ChannelContener(){}
 
     public ChannelGson[] getChannels() {
         return channels;
