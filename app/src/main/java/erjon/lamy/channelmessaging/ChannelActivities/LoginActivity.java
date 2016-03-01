@@ -76,13 +76,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("username", identifiant));
         nameValuePairs.add(new BasicNameValuePair("password", motDePasse));
-        WSRequest connectionRequest = new WSRequest("http://www.raphaelbischof.fr/messaging/?function=connect", nameValuePairs);
+        WSRequest connectionRequest = new WSRequest(0, "http://www.raphaelbischof.fr/messaging/?function=connect", nameValuePairs);
         connectionRequest.setOnWSEventListener(this);
         connectionRequest.execute();
     }
 
     @Override
-    public void OnSuccess(String result) {
+    public void OnSuccess(int requestCode, String result) {
         Gson gson = new Gson();
         ConnectGson connection = gson.fromJson(result, ConnectGson.class);
 
@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void OnError() {
+    public void OnError(int requestCode) {
 
     }
 }

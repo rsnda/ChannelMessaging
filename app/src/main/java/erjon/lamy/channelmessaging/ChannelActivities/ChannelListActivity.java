@@ -40,13 +40,13 @@ public class ChannelListActivity extends AppCompatActivity implements OnWSEventL
 
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("accesstoken", accessToken));
-        WSRequest connectionRequest = new WSRequest("http://www.raphaelbischof.fr/messaging/?function=getchannels", nameValuePairs);
+        WSRequest connectionRequest = new WSRequest(0, "http://www.raphaelbischof.fr/messaging/?function=getchannels", nameValuePairs);
         connectionRequest.setOnWSEventListener(this);
         connectionRequest.execute();
     }
 
     @Override
-    public void OnSuccess(String result) {
+    public void OnSuccess(int requestCode, String result) {
         Gson gson = new Gson();
         ChannelContener channels = gson.fromJson(result, ChannelContener.class);
 
@@ -57,7 +57,7 @@ public class ChannelListActivity extends AppCompatActivity implements OnWSEventL
     }
 
     @Override
-    public void OnError() {
+    public void OnError(int requestCode) {
 
     }
 

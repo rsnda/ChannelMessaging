@@ -26,10 +26,12 @@ public class WSRequest extends AsyncTask<String, Integer, String>{
     private List<NameValuePair> parametres;
     private ArrayList<OnWSEventListener> listeners = new ArrayList<>();
     private Exception myException = null;
+    private int requestCode;
 
-    public WSRequest(String url, List<NameValuePair> parametres) {
-        this.url = url;
+    public WSRequest(int requestCode, String url ,List<NameValuePair> parametres) {
+        this.requestCode = requestCode;
         this.parametres = parametres;
+        this.url = url;
     }
 
     public void setOnWSEventListener(OnWSEventListener listener){
@@ -69,11 +71,11 @@ public class WSRequest extends AsyncTask<String, Integer, String>{
         {
             if (myException == null)
             {
-                listener.OnSuccess(s);
+                listener.OnSuccess(requestCode, s);
             }
             else
             {
-                listener.OnError();
+                listener.OnError(requestCode);
             }
 
         }
