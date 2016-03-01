@@ -1,4 +1,4 @@
-package erjon.lamy.channelmessaging.Gson;
+package erjon.lamy.channelmessaging.Gson.ChannelList;
 
 /**
  * Created by Erjon on 08/02/2016.

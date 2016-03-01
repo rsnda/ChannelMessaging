@@ -8,6 +8,11 @@ public class MessageGson {
     private String message;
     private String date;
     private String imageUrl;
+    private String username;
+    private String latitude;
+    private String longitude;
+    private String messageImageUrl;
+    private String soundUrl;
 
     MessageGson() {}
 
@@ -25,5 +30,29 @@ public class MessageGson {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getMessageImageUrl() {
+        return messageImageUrl;
+    }
+
+    public String getSoundUrl() {
+        return soundUrl;
     }
 }

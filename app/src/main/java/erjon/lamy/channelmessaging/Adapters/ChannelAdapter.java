@@ -1,4 +1,4 @@
-package erjon.lamy.channelmessaging;
+package erjon.lamy.channelmessaging.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import erjon.lamy.channelmessaging.Gson.ChannelGson;
+import erjon.lamy.channelmessaging.Gson.ChannelList.ChannelGson;
+import erjon.lamy.channelmessaging.R;
 
 /**
  * Created by Erjon on 08/02/2016.

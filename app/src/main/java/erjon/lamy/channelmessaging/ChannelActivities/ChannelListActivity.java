@@ -17,9 +17,9 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
-import erjon.lamy.channelmessaging.ChannelAdapter;
-import erjon.lamy.channelmessaging.Gson.ChannelContener;
-import erjon.lamy.channelmessaging.Gson.ChannelGson;
+import erjon.lamy.channelmessaging.Adapters.ChannelAdapter;
+import erjon.lamy.channelmessaging.Gson.ChannelList.ChannelContener;
+import erjon.lamy.channelmessaging.Gson.ChannelList.ChannelGson;
 import erjon.lamy.channelmessaging.OnWSEventListener;
 import erjon.lamy.channelmessaging.R;
 import erjon.lamy.channelmessaging.WSRequest;

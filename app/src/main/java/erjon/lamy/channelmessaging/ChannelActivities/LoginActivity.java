@@ -20,7 +20,7 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
-import erjon.lamy.channelmessaging.Gson.ConnectGson;
+import erjon.lamy.channelmessaging.Gson.Connect.ConnectGson;
 import erjon.lamy.channelmessaging.OnWSEventListener;
 import erjon.lamy.channelmessaging.R;
 import erjon.lamy.channelmessaging.WSRequest;
