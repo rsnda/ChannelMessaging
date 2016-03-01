@@ -16,10 +16,6 @@ public class MessageGson {
 
     MessageGson() {}
 
-    public int getUserId() {
-        return userID;
-    }
-
     public String getMessage() {
         return message;
     }

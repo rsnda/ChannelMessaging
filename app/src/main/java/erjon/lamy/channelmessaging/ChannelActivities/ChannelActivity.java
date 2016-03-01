@@ -8,6 +8,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -18,6 +20,7 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
+import erjon.lamy.channelmessaging.Adapters.MessageAdapter;
 import erjon.lamy.channelmessaging.Gson.Messaging.MessageContainer;
 import erjon.lamy.channelmessaging.Gson.Messaging.MessageGson;
 import erjon.lamy.channelmessaging.OnWSEventListener;
@@ -25,7 +28,7 @@ import erjon.lamy.channelmessaging.R;
 import erjon.lamy.channelmessaging.WSRequest;
 
 public class ChannelActivity extends AppCompatActivity implements OnWSEventListener {
-
+    private ListView myList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class ChannelActivity extends AppCompatActivity implements OnWSEventListe
         Intent intent = getIntent();
         String channelId = intent.getStringExtra("id");
 
+        myList = (ListView)findViewById(R.id.lvMessageList);
         SharedPreferences settings = getSharedPreferences("PREFS", 0);
         String accessToken = settings.getString("accessToken", "");
 
@@ -58,11 +62,7 @@ public class ChannelActivity extends AppCompatActivity implements OnWSEventListe
             Toast toast = Toast.makeText(getApplicationContext(), "Pas de message", Toast.LENGTH_LONG);
             toast.show();
         }else{
-            for(MessageGson myMess : myMessages)
-            {
-                Toast toast2 = Toast.makeText(getApplicationContext(),myMess.getMessage(), Toast.LENGTH_LONG);
-                toast2.show();
-            }
+            myList.setAdapter(new MessageAdapter(myMessages, this));
         }
 
     }
@@ -72,4 +72,5 @@ public class ChannelActivity extends AppCompatActivity implements OnWSEventListe
         Toast toast = Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_LONG);
         toast.show();
     }
+
 }
