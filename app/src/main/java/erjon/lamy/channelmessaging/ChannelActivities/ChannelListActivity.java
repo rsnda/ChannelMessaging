@@ -64,7 +64,7 @@ public class ChannelListActivity extends AppCompatActivity implements OnWSEventL
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intentChannel = new Intent(getApplicationContext(),ChannelActivity.class);
-        intentChannel.putExtra("id", id+"");
+        intentChannel.putExtra("id", ""+id);
         startActivity(intentChannel);
     }
 }

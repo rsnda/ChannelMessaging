@@ -10,12 +10,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import erjon.lamy.channelmessaging.Gson.Messaging.MessageContainer;
+import erjon.lamy.channelmessaging.Gson.Messaging.MessageGson;
 import erjon.lamy.channelmessaging.OnWSEventListener;
 import erjon.lamy.channelmessaging.R;
 import erjon.lamy.channelmessaging.WSRequest;
@@ -45,8 +49,22 @@ public class ChannelActivity extends AppCompatActivity implements OnWSEventListe
 
     @Override
     public void OnSuccess(String result) {
-        Toast toast = Toast.makeText(getApplicationContext(),"High Success !", Toast.LENGTH_LONG);
-        toast.show();
+        Gson gson = new Gson();
+        MessageContainer messages = gson.fromJson(result, MessageContainer.class);
+
+        MessageGson[] myMessages = messages.getMessages();
+
+        if (myMessages == null){
+            Toast toast = Toast.makeText(getApplicationContext(), "Pas de message", Toast.LENGTH_LONG);
+            toast.show();
+        }else{
+            for(MessageGson myMess : myMessages)
+            {
+                Toast toast2 = Toast.makeText(getApplicationContext(),myMess.getMessage(), Toast.LENGTH_LONG);
+                toast2.show();
+            }
+        }
+
     }
 
     @Override

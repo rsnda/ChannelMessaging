@@ -4,7 +4,7 @@ package erjon.lamy.channelmessaging.Gson;
  * Created by Erjon on 08/02/2016.
  */
 public class ChannelGson {
-    private int channelId;
+    private int channelID;
     private String name;
     private int connectedUsers;
 
@@ -15,7 +15,7 @@ public class ChannelGson {
     }
 
     public int getChannelId() {
-        return channelId;
+        return channelID;
     }
 
     public String getName() {
