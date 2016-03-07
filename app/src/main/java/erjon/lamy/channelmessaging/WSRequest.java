@@ -2,15 +2,12 @@ package erjon.lamy.channelmessaging;
 
 import android.os.AsyncTask;
 
-import com.google.gson.Gson;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -20,6 +17,7 @@ import java.util.List;
 
 /**
  * Created by Erjon on 02/02/2016.
+ *
  */
 public class WSRequest extends AsyncTask<String, Integer, String>{
     private String url;

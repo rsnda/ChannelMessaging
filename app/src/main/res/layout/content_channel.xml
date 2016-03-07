@@ -12,32 +12,12 @@
     tools:context=".ChannelActivities.ChannelActivity"
     tools:showIn="@layout/activity_channel">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lvMessageList"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/llBottomBar"/>
-
-    <LinearLayout
+    <fragment
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/llBottomBar"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/etMessage"
-            android:layout_weight="4"/>
-        
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/sendBtn"
-            android:text="Send"/>
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:name="erjon.lamy.channelmessaging.fragments.MessageFragment"
+        android:id="@+id/fragmentB_ID"
+        tools:layout="@layout/fragment_channel" />
 
 </RelativeLayout>
 
