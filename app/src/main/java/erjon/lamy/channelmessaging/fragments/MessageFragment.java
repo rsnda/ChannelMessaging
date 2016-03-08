@@ -63,16 +63,18 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
 
         final Runnable r = new Runnable() {
             public void run() {
-                SharedPreferences settings = getActivity().getSharedPreferences("PREFS", 0);
-                accessToken = settings.getString("accessToken", "");
+                if (getActivity() != null){
+                    SharedPreferences settings = getActivity().getSharedPreferences("PREFS", 0);
+                    accessToken = settings.getString("accessToken", "");
 
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                nameValuePairs.add(new BasicNameValuePair("accesstoken", accessToken));
-                nameValuePairs.add(new BasicNameValuePair("channelid", channelID));
-                final WSRequest connectionRequest = new WSRequest(REQUEST_GET_MESSAGES, "http://www.raphaelbischof.fr/messaging/?function=getmessages", nameValuePairs);
-                connectionRequest.setOnWSEventListener(MessageFragment.this);
-                connectionRequest.execute();
-                handler.postDelayed(this, 1000);
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                    nameValuePairs.add(new BasicNameValuePair("accesstoken", accessToken));
+                    nameValuePairs.add(new BasicNameValuePair("channelid", channelID));
+                    final WSRequest connectionRequest = new WSRequest(REQUEST_GET_MESSAGES, "http://www.raphaelbischof.fr/messaging/?function=getmessages", nameValuePairs);
+                    connectionRequest.setOnWSEventListener(MessageFragment.this);
+                    connectionRequest.execute();
+                    handler.postDelayed(this, 1000);
+                }
             }
         };
 
@@ -98,6 +100,9 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
 
     @Override
     public void OnSuccess(int requestCode, String result) {
+        // If the fragment is not on the activity, the method ends
+        if(getActivity() == null){ return; }
+
         if(requestCode == REQUEST_GET_MESSAGES){
             Gson gson = new Gson();
             MessageContainer messages = gson.fromJson(result, MessageContainer.class);
