@@ -67,14 +67,6 @@ public class WSRequest extends AsyncTask<String, Integer, String>{
 
         for (OnWSEventListener listener : listeners)
         {
-            /*if (myException == null)
-            {
-                listener.OnSuccess(requestCode, s);
-            }
-            else
-            {
-                listener.OnError(requestCode);
-            }*/
             if(myException != null){ // In an exception was caught
                 listener.OnError(requestCode);
                 return;

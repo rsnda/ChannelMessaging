@@ -86,21 +86,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Gson gson = new Gson();
         ConnectGson connection = gson.fromJson(result, ConnectGson.class);
 
-        if(connection.getCode() == 200)
-        {
-            SharedPreferences settings = getSharedPreferences("PREFS", 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putString("accessToken", connection.getAccesstoken());
-            editor.commit();
-
-            Intent intentChannelList = new Intent(getApplicationContext(),ChannelListActivity.class);
-            startActivity(intentChannelList);
-        }
-        else
-        {
+        if(connection.getCode() != 200){ // If return is not a success, we show the response in a Toast and end functions
             Toast toast = Toast.makeText(getApplicationContext(), connection.getResponse(), Toast.LENGTH_LONG);
             toast.show();
+            return;
         }
+
+        // Connection was successful
+        SharedPreferences settings = getSharedPreferences("PREFS", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("accessToken", connection.getAccesstoken());
+        editor.commit();
+
+        Intent intentChannelList = new Intent(getApplicationContext(),ChannelListActivity.class);
+        startActivity(intentChannelList);
     }
 
     @Override

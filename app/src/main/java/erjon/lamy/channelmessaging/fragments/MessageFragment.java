@@ -70,7 +70,9 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                     nameValuePairs.add(new BasicNameValuePair("accesstoken", accessToken));
                     nameValuePairs.add(new BasicNameValuePair("channelid", channelID));
-                    final WSRequest connectionRequest = new WSRequest(REQUEST_GET_MESSAGES, "http://www.raphaelbischof.fr/messaging/?function=getmessages", nameValuePairs);
+                    final WSRequest connectionRequest = new WSRequest(REQUEST_GET_MESSAGES,
+                            "http://www.raphaelbischof.fr/messaging/?function=getmessages",
+                            nameValuePairs);
                     connectionRequest.setOnWSEventListener(MessageFragment.this);
                     connectionRequest.execute();
                     handler.postDelayed(this, 1000);
@@ -83,20 +85,31 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
         return v;
     }
 
+    /**
+     * Fired when the "SEND" button is clicked
+     * Send the message to the active channel
+     * @param v
+     */
     @Override
     public void onClick(View v) {
-        // NameValuePair nvp = new Name
         String mess = messageToSend.getText().toString();
 
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("accesstoken", accessToken));
         nameValuePairs.add(new BasicNameValuePair("channelid", channelID));
         nameValuePairs.add(new BasicNameValuePair("message", mess));
-        WSRequest connectionRequest = new WSRequest(REQUEST_SEND_MESSAGE, "http://www.raphaelbischof.fr/messaging/?function=sendmessage", nameValuePairs);
+        WSRequest connectionRequest = new WSRequest(REQUEST_SEND_MESSAGE,
+                "http://www.raphaelbischof.fr/messaging/?function=sendmessage",
+                nameValuePairs);
         connectionRequest.setOnWSEventListener(this);
         connectionRequest.execute();
         messageToSend.setText("");
     }
+
+    /**
+     * Change the id of the channel to be displayed
+     * @param newChannelId
+     */
     public void changeChannelId(String newChannelId){
         channelID = newChannelId;
     }
