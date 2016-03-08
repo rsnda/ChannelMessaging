@@ -97,13 +97,16 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
         connectionRequest.execute();
         messageToSend.setText("");
     }
+    public void changeChannelId(String newChannelId){
+        channelID = newChannelId;
+    }
 
     @Override
     public void OnSuccess(int requestCode, String result) {
         // If the fragment is not on the activity, the method ends
         if(getActivity() == null){ return; }
 
-        if(requestCode == REQUEST_GET_MESSAGES){
+        if(requestCode == REQUEST_GET_MESSAGES){ // A message is received
             Gson gson = new Gson();
             MessageContainer messages = gson.fromJson(result, MessageContainer.class);
 
@@ -112,13 +115,15 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
             if (myMessages == null){
                 Toast toast = Toast.makeText(getActivity(), "Pas de message", Toast.LENGTH_LONG);
                 toast.show();
-            }else{
-                myList.setAdapter(new MessageAdapter(myMessages, getActivity()));
+                return;
             }
-        }else{
+
+            myList.setAdapter(new MessageAdapter(myMessages, getActivity()));
+        }
+
+        if(requestCode == REQUEST_SEND_MESSAGE){ // A message is sent
             Gson gson = new Gson();
             MessageSendGson messSend = gson.fromJson(result, MessageSendGson.class);
-
             Toast toast = Toast.makeText(getActivity(), messSend.getResponse(), Toast.LENGTH_LONG);
             toast.show();
         }

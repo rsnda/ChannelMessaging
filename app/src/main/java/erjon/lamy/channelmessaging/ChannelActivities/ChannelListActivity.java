@@ -22,14 +22,16 @@ public class ChannelListActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ChannelListFragment channelListFrag = (ChannelListFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentA_ID);
         MessageFragment messageFrag = (MessageFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentB_ID);
-        if(messageFrag == null|| !messageFrag.isInLayout()){
+
+        if(messageFrag == null || !messageFrag.isInLayout()){ // The fragment is not visible / on screen
             Intent intentChannel = new Intent(getApplicationContext(),ChannelActivity.class);
             intentChannel.putExtra("id", ""+id);
             startActivity(intentChannel);
-        } else {
-            //
+            return;
         }
+
+        // From here the layout shows both fragments
+        messageFrag.changeChannelId(""+id);
     }
 }
