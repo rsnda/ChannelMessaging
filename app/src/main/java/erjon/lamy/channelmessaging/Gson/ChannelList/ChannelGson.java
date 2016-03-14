@@ -6,12 +6,12 @@ package erjon.lamy.channelmessaging.Gson.ChannelList;
 public class ChannelGson {
     private int channelID;
     private String name;
-    private int connectedUsers;
+    private int connectedusers;
 
     ChannelGson(){}
 
     public int getConnectedUsers() {
-        return connectedUsers;
+        return connectedusers;
     }
 
     public int getChannelId() {
