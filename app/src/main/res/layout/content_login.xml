@@ -15,6 +15,30 @@
     android:weightSum="1">
 
     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_logo"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Connectez-vous pour accéder à la messagerie
+instantanée"/>
+    </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/green"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -63,6 +87,7 @@
         android:id="@+id/btnValider"
         android:layout_below="@+id/editMotDePasse"
         android:layout_centerHorizontal="true"
+        android:background="@color/green"
         android:layout_marginTop="27dp" />
 
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ import erjon.lamy.channelmessaging.WSRequest;
 public class MessageFragment extends Fragment implements View.OnClickListener, OnWSEventListener {
     private static final int REQUEST_SEND_MESSAGE = 1;
     private static final int REQUEST_GET_MESSAGES = 2;
-    private Button sendBtn;
+    private ImageButton sendBtn;
     private EditText messageToSend;
     private String channelID;
     private String accessToken;
@@ -53,7 +54,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
         Intent intent = getActivity().getIntent();
         channelID = intent.getStringExtra("id");
 
-        sendBtn = (Button) v.findViewById(R.id.sendBtn);
+        sendBtn = (ImageButton) v.findViewById(R.id.sendBtn);
         messageToSend = (EditText) v.findViewById(R.id.etMessage);
 
         sendBtn.setOnClickListener(this);
