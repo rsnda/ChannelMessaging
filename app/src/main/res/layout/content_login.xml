@@ -30,7 +30,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Connectez-vous pour accéder à la messagerie
-instantanée"/>
+instantanée"
+            android:textAlignment="center" />
     </LinearLayout>
     
     <View

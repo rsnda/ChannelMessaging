@@ -53,8 +53,8 @@ public class MessageAdapter extends BaseAdapter {
         ImageView ivProfilePic = (ImageView) rowView.findViewById(R.id.ivProfilePic);
 
         MessageGson myMess = getItem(position);
-        tvUserMessage.setText(myMess.getUsername() + " : " + myMess.getMessage());
-        tvDate.setText(myMess.getDate());
+        tvUserMessage.setText(myMess.getMessage());
+        tvDate.setText(myMess.getUsername());
 
         Picasso.with(context).load(myMess.getImageUrl()).transform(new CircleTransform()).into(ivProfilePic);
 

@@ -132,7 +132,15 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
                 return;
             }
 
+            // save index and top position
+            int index = myList.getFirstVisiblePosition();
+            View v = myList.getChildAt(0);
+            int top = (v == null) ? 0 : (v.getTop() - myList.getPaddingTop());
+
             myList.setAdapter(new MessageAdapter(myMessages, getActivity()));
+
+            // restore index and position
+            myList.setSelectionFromTop(index, top);
         }
 
         if(requestCode == REQUEST_SEND_MESSAGE){ // A message is sent
